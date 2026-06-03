@@ -329,7 +329,7 @@ def generate_state_rows(
         ),
     ))
 
-        last_move_type = "start"
+    last_move_type = "start"
     cuts_since_last_drop = 0
 
     while True:
