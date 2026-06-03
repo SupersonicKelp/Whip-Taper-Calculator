@@ -329,33 +329,37 @@ def generate_state_rows(
         ),
     ))
 
-    last_move_type = "start"
+        last_move_type = "start"
     cuts_since_last_drop = 0
 
-   while True:
-    support_before = support_count_total(dropped_count(), belly_counts, core_counts)
-
-    if overlay_active == overlay_end and support_before == 0:
-        rows.append(
-            StateRow(
-                label=f"Terminate ({overlay_active}-0)",
-                overlay_count=overlay_active,
-                support_count=0,
-                mu_g_per_in=state_mu(
-                    overlay_active=overlay_active,
-                    dropped_overlay_underlay=dropped_count(),
-                    belly_counts=belly_counts,
-                    core_counts=core_counts,
-                    overlay=overlay,
-                    bellies=bellies,
-                    core_groups=core_groups,
-                    braided_factor=braided_factor,
-                ),
-            )
+    while True:
+        support_before = support_count_total(
+            dropped_count(),
+            belly_counts,
+            core_counts,
         )
-        break
 
-    steps_done = len(rows) - 1
+        if overlay_active == overlay_end and support_before == 0:
+            rows.append(
+                StateRow(
+                    label=f"Terminate ({overlay_active}-0)",
+                    overlay_count=overlay_active,
+                    support_count=0,
+                    mu_g_per_in=state_mu(
+                        overlay_active=overlay_active,
+                        dropped_overlay_underlay=dropped_count(),
+                        belly_counts=belly_counts,
+                        core_counts=core_counts,
+                        overlay=overlay,
+                        bellies=bellies,
+                        core_groups=core_groups,
+                        braided_factor=braided_factor,
+                    ),
+                )
+            )
+            break
+
+        steps_done = len(rows) - 1
 
         def any_internal_cut_available_now() -> bool:
             # Actual desired cut order:
