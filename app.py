@@ -333,30 +333,9 @@ def generate_state_rows(
     cuts_since_last_drop = 0
 
     while True:
-        support_before = support_count_total(
-            dropped_count(),
-            belly_counts,
-            core_counts,
-        )
+        support_before = support_count_total(dropped_count(), belly_counts, core_counts)
 
         if overlay_active == overlay_end and support_before == 0:
-            rows.append(
-                StateRow(
-                    label=f"Terminate ({overlay_active}-0)",
-                    overlay_count=overlay_active,
-                    support_count=0,
-                    mu_g_per_in=state_mu(
-                        overlay_active=overlay_active,
-                        dropped_overlay_underlay=dropped_count(),
-                        belly_counts=belly_counts,
-                        core_counts=core_counts,
-                        overlay=overlay,
-                        bellies=bellies,
-                        core_groups=core_groups,
-                        braided_factor=braided_factor,
-                    ),
-                )
-            )
             break
 
         steps_done = len(rows) - 1
@@ -584,7 +563,7 @@ def generate_state_rows(
         raise ValueError("Planner got stuck with no valid move.")
 
     mu_values = np.array([r.mu_g_per_in for r in rows], dtype=float)
-    if np.any(np.diff(mu_values[:-1]) >= 0.0):
+    if np.any(np.diff(mu_values) >= 0.0):
         raise ValueError(
             "Generated mass-density ladder is not strictly decreasing. Check your configuration."
         )
