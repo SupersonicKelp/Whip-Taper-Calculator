@@ -804,8 +804,8 @@ def build_table_rows(
         min_delta_in=build_min_delta_in,
     )
 
-shifted_labels = [r.label for r in state_rows[1:]]
-shifted_labels.append("Terminate")
+    shifted_labels = [r.label for r in state_rows[1:]]
+    shifted_labels.append("Terminate")
 
     rows = []
     for i, sr in enumerate(state_rows):
