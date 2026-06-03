@@ -804,11 +804,14 @@ def build_table_rows(
         min_delta_in=build_min_delta_in,
     )
 
-    rows = []
-    for i, sr in enumerate(state_rows):
-        rows.append({
-            "row_index": i + 1,
-            "move": sr.label,
+shifted_labels = [r.label for r in state_rows[1:]]
+shifted_labels.append("Terminate")
+
+rows = []
+for i, sr in enumerate(state_rows):
+    rows.append({
+        "row_index": i + 1,
+        "move": shifted_labels[i],
             "normalized_node": node_end_exact[i],
             "normalized_delta": norm_delta_exact[i],
             "inch_node": inch_node_exact[i],
