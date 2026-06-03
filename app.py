@@ -823,7 +823,7 @@ for i, sr in enumerate(state_rows):
             "mu_g_per_in": sr.mu_g_per_in,
         })
 
-    return rows
+return rows
 
 # =============================================================================
 # STREAMLIT UI
