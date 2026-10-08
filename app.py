@@ -74,6 +74,7 @@ MATERIAL_PRESETS = {
     "Gutted Dacron (0.10 g/in)": 0.10,
     "Ungutted DynaX (0.16 g/in)": 0.16,
     "Gutted DynaX (0.12 g/in)": 0.12,
+    "Jinglebell Shot (1.00 g/in)": 1.00,
 }
 
 TAPER_OPTIONS = [
